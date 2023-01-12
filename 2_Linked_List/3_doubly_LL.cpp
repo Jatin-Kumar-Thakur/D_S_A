@@ -16,10 +16,13 @@ void createNewNode(node *&head, node *&temp, node *&tail, int data)
     if (head == 0)
     {
         head = temp = tail = newnode;
+        head->next=newnode;
+        head->pre=tail;
     }
     else
     {
         tail = newnode;
+        head->pre=newnode;
         temp->next = newnode;
         newnode->pre = temp;
         temp = temp->next;
