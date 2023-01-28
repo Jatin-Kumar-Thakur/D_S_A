@@ -8,16 +8,20 @@ void swap(int &a, int &b)
     a = b;
     b = temp;
 }
-int partition(int arr[], int lb,int ub)
+
+int partition(int arr[], int lb, int ub)
 {
-    int start = lb, end = ub, pivit = arr[lb];
-    while (start <= end)
+    int start, end, pivot;
+    start = lb;
+    end = ub;
+    pivot = arr[lb];
+    while (start < end)
     {
-        while (arr[start] <= pivit)
+        while (arr[start] <= pivot)
         {
             start++;
         }
-        while (arr[end] > pivit)
+        while (arr[end] > pivot)
         {
             end--;
         }
@@ -25,20 +29,19 @@ int partition(int arr[], int lb,int ub)
         {
             swap(arr[start], arr[end]);
         }
-    swap(arr[lb],arr[ub]);
     }
-    return pivit;
-
+    swap(arr[lb], arr[end]);
+    return end;
 }
-void quick_sort(int arr[],int lb,int ub){
-    if (lb<ub)
-    {
-        int res=partition(arr,lb,ub);
-        quick_sort(arr,lb,res-1);
-        quick_sort(arr,res+1,ub);
 
+void quick_sort(int arr[], int lb, int ub)
+{
+    if (lb < ub)
+    {
+        int res = partition(arr, lb, ub);
+        quick_sort(arr, lb, res - 1);
+        quick_sort(arr, res + 1, ub);
     }
-    
 }
 
 void print_array(int arr[], int size)
@@ -65,7 +68,7 @@ int main(int argc, char const *argv[])
         cin >> arr[i];
     }
     print_array(arr, size);
-    quick_sort(arr, 0,size-1);
+    quick_sort(arr, 0, size - 1);
     print_array(arr, size);
     return 0;
 }
